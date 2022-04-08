@@ -1,0 +1,100 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+xmlns:h = "http://java.sun.com/jsf/html"
+xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous" />
+	<title>Employee Management</title>
+	
+	<style>
+		.errorColor{
+			color : red;
+		}
+	</style>
+
+</h:head>
+
+<h:body>
+
+	<center>
+		<h2>
+			<h:outputText value="Search Employee" />
+		</h2>
+	</center>
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-10">
+			<h:form id="employeeForm">
+					<center>
+						<div class="form-group">
+							<h:outputLabel for="id" class="control-label col-sm">Enter Employee ID</h:outputLabel>
+							<div class="col-sm-8">
+								<h:inputText value="#{employeeBeen.id}" id = "id" label="Employee ID"
+									class="form-control">
+								</h:inputText>
+							</div>
+						</div>
+						<h:commandButton action="#{employeeDAOImp.searchEmployee(employeeBeen.id)}"
+							value="Search Employee" class="btn btn-success btnSpace" />
+						
+					</center>
+        	<br/>
+        <h:dataTable value="#{searchRecord}" var="ee" class="table table-striped table-hover table-bordered tableUpdated">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{ee.id}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                <h:outputText value="#{ee.firstName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                <h:outputText value="#{ee.lastName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Division</f:facet>
+                <h:outputText value="#{ee.division}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Building</f:facet>
+                <h:outputText value="#{ee.building}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                <h:outputText value="#{ee.title}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Room</f:facet>
+                <h:outputText value="#{ee.room}" />
+            </h:column>
+            
+        </h:dataTable>
+
+					<center>
+						<h:commandButton
+							action="index.xhtml?faces-redirect=true"
+							value="Back" class="btn btn-success btnSpace" />
+
+					</center>
+
+				</h:form>
+			
+			</div>
+			<div class="col"></div>
+		</div>
+	</div> 
+      
+       
+    </h:body> 
+</html>

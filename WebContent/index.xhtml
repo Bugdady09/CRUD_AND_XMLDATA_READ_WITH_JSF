@@ -1,0 +1,90 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns = "http://www.w3.org/1999/xhtml"   
+xmlns:h = "http://java.sun.com/jsf/html"
+xmlns:f = "http://java.sun.com/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<link rel="stylesheet"
+		href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+		crossorigin="anonymous" />
+	<title>Employee Management</title>
+
+</h:head>
+
+<h:body>
+	<br/>
+	<center>
+		<h2>
+			<h:outputText value="Employee Records" />
+		</h2>
+	</center>
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col-10">
+			<h:form id="employeeForm">
+			<center>
+            <h:commandButton action="createEmployee.xhtml?faces-redirect=true" value="Create New Employee" class="btn btn-success btnSpace mr-3" />
+        	
+        	<h:commandButton action="#{employeeDAOImp.readXMlFileData()}"
+							value="Upload Employee XML File" class="btn btn-success btnSpace mr-3" />
+							
+			<h:commandButton action="#{employeeDAOImp.gotoSearch()}"
+							value="Search Employee" class="btn btn-success btnSpace" />
+        	</center>
+        	<br />
+        <h:dataTable id="employeeTable" binding="#{table}" value="#{employeeDAOImp.getAllEmployees()}" var="employee" class="table table-striped table-hover table-bordered tableUpdated">
+            <h:column>
+                <f:facet name="header">Id</f:facet>
+                <h:outputText value="#{employee.id}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">First Name</f:facet>
+                <h:outputText value="#{employee.firstName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Last Name</f:facet>
+                <h:outputText value="#{employee.lastName}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Division</f:facet>
+                <h:outputText value="#{employee.division}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Building</f:facet>
+                <h:outputText value="#{employee.building}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Title</f:facet>
+                <h:outputText value="#{employee.title}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Room</f:facet>
+                <h:outputText value="#{employee.room}" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Update</f:facet>
+                <h:commandButton action="#{employeeDAOImp.gotoUpdateEmployee(employee.firstName, employee.lastName)}" value="Update" class="btn btn-primary" />
+            </h:column>
+            <h:column>
+                <f:facet name="header">Delete</f:facet>
+                <h:commandButton action="#{employeeDAOImp.deleteEmployee(employee.id)}" value="Delete" class="btn btn-danger" />
+            </h:column>
+        </h:dataTable>
+        
+    </h:form>
+			
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+      
+       
+    </h:body> 
+</html>
